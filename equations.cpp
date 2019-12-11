@@ -20,12 +20,21 @@ namespace equations {
 	}
 }
 
+/**
+ * Combines vals to matrix m.
+ *
+ * @param m the matrix m.
+ * @param vals the values.
+ */
 void augment_matrix(Matrix &m, vector<double> &vals) {
 	for (int i = 0; i < m.size(); ++i) {
 		m.at(i).push_back(vals.at(i));
 	}
 }
 
+/**
+ * Printing support for a matrix.
+ */
 ostream& operator<<(ostream& out, vector<vector<double>> &v) {
 	for (int i = 0; i < v.size(); ++i) {
 		for (int j = 0; j < v.at(0).size(); ++j) {
@@ -37,6 +46,11 @@ ostream& operator<<(ostream& out, vector<vector<double>> &v) {
 	return out;
 }
 
+/**
+ * Performs Gaussian elimination on an augmented matrix m.
+ *
+ * @param m the matrix m.
+ */
 void gauss(vector<vector<double>> &m) {
 	int sz = m.size();
 
@@ -86,6 +100,12 @@ void gauss(vector<vector<double>> &m) {
 	}
 }
 
+/**
+ * Performs forward substitution on an augmented matrix m.
+ *
+ * @param m the matrix m.
+ * @return the result vector.
+ */
 vector<double> forward_sub(Matrix &m) {
 	map<int, double> ans;
 
@@ -116,6 +136,13 @@ vector<double> forward_sub(Matrix &m) {
 	return vd;
 }
 
+/**
+ * Performs backwards substitution on an augmented matrix m.
+ *
+ * @param m the matrix m.
+ * @param jordan false if it's using Gaussian elimination, true if using Gauss-Jordan method.
+ * @return  the result vector.
+ */
 vector<double> backwards_sub(Matrix &m, bool jordan=false) {
 	map<int, double> ans;
 
@@ -161,6 +188,12 @@ vector<double> backwards_sub(Matrix &m, bool jordan=false) {
 	return vd;
 }
 
+/**
+ * Crout decomposition of a matrix v.
+ *
+ * @param v the matrix v.
+ * @return a vector of matrices, L and U.
+ */
 vector<Matrix> crout(Matrix &v) {
 	vector<Matrix> ans;
 
@@ -212,6 +245,13 @@ vector<Matrix> crout(Matrix &v) {
 	return ans;
 }
 
+/**
+ * Doolittle decomposition of a matrix v.
+ *
+ * @param v the matrix v.
+ * @return a vector of matrices, L and U.
+ */
+v
 vector<Matrix> doolittle(Matrix &v) {
 	vector<Matrix> ans;
 
@@ -262,65 +302,3 @@ vector<Matrix> doolittle(Matrix &v) {
 
 }
 
-/*
-int main() {
-	Matrix v;
-	
-	cout << "input n: ";
-	int n;
-	cin >> n;
-
-	for (int i = 0; i < n; ++i) {
-		vector<double> vd;
-		for (int j = 0; j < n; ++j) {
-			int val;
-			cin >> val;
-			vd.push_back(val);
-		}
-
-		v.push_back(vd);
-	}
-
-	vector<double> vals;
-	cout << "input ans: ";
-	for (int i = 0; i < n; ++i) {
-		int vl;
-		cin >> vl;
-		vals.push_back(vl);
-	}
-
-	//gauss(v);
-	//backwards_sub(v, true);
-	
-	vector<Matrix> ans = crout(v);
-
-	Matrix L = ans[0];
-	Matrix U = ans[1];
-
-	// solving for LY = B
-	// using forward sub
-	
-	Matrix augmented_L = L;
-	
-	for (int r = 0; r < L.size(); ++r) {
-		augmented_L.at(r).push_back(vals.at(r));
-	}
-
-	vector<double> y_ans = forward_sub(augmented_L);
-
-	for (auto &yv : y_ans) {
-		cout << yv << " ";
-	}
-	//cout << "end of y vals" << endl;
-
-	Matrix augmented_U = U;
-	
-	for (int r = 0; r < U.size(); ++r) {
-		augmented_U.at(r).push_back(y_ans.at(r));
-	}
-
-	vector<double> result = backwards_sub(augmented_U);
-
-	return 0;
-}
-*/
