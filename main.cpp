@@ -9,6 +9,11 @@
 
 using namespace std;
 
+/**
+ * Main prompt. Displayed once and once only when launching the application.
+ *
+ * @return User's selection in integer.
+ */
 int prompt() {
 	cout << "Applications of various numerical methods" << endl;
 	cout << "by Caroline, Muslimah, and Steven Hans." << endl;
@@ -106,6 +111,7 @@ int main() {
 		int n;
 		cin >> n;
 		
+		// Inputting to the coefficient matrix.
 		for (int i = 0; i < n; ++i) {
 			vector<double> vd;
 			cout << "Koefisien-koefisien baris ke-" << i+1 << ": ";
@@ -118,6 +124,7 @@ int main() {
 			v.push_back(vd);
 		}
 		
+		// Inputting to the result matrix.
 		vector<double> vals;
 		cout << "Input solusi-solusi persamaan: ";
 		for (int i = 0; i < n; ++i) {
