@@ -31,11 +31,22 @@ namespace approx {
  * @param nim sum of two last digits 
  * 	  of the student id. If it exceeds 10, 
  * 	  sum those two digits.
+ * @return the value of the function.
  */
 double f(double x, double nim) {
 	return 5*x*x*x + 17*x*x - nim*x - 6;
 }
 
+/**
+ * From a collection of tabular data, determine the next bound suitable.
+ * It is said suitable if those to points crosses the X axis, meaning a solution exists between 
+ * those two points. Assume the function is continuous.
+ *
+ * @param xvals x coordinates.
+ * @param yvals values of x coordinates.
+ * @param low the low bound.
+ * @param high the high bound.
+ */
 void set_bounds(double *xvals, double *yvals, double &low, double &high) {
 	for (int index = 0; index <= 10; ++index) {
 		double pivot = yvals[index];
@@ -93,6 +104,7 @@ void print_table(double *xlist, double *ylist) {
  * @param high_bound the high bound
  * @param nim student id
  * @param iter_count how many times to iterate through tabulation
+ * @return true if tabulation is successful, false otherwise.
  */
 bool tabulation(double low_bound, double high_bound, double nim, int iter_count) {
 	double increment = 1.0;
@@ -145,10 +157,30 @@ void print_bisection_entry(int iteration, double a, double b, double c, double f
 					     << endl;
 }
 
+/**
+ * Computing two values between a and b.
+ * 
+ * @param a value of a
+ * @param b value of b
+ * @param fa compatibility for function arguments.
+ * @param fb compatibility for function arguments.
+ * @return the value between a and b.
+ */
 double midpoint(double a, double b, double fa, double fb) {
 	return (a+b)/2.0;
 }
 
+/**
+ * Performs a bisection using specified function as the next point.
+ *
+ * Such functions can be midpoint function or a regula falsi function.
+ *
+ * @param low_bound the current low bound of function.
+ * @param high_bound the current high bund of function.
+ * @param nim numeralized identification number.
+ * @param iter_count iteration count.
+ * @param cf specifying function for the next point.
+ */
 void bisection(double low_bound, double high_bound, double nim, int iter_count, function<double (double, double, double, double)> cf) {
 	print_bisection_header();
 	for (int i = 1; i <= iter_count; ++i) {
@@ -182,6 +214,15 @@ void bisection(double low_bound, double high_bound, double nim, int iter_count, 
 	}		
 }
 
+/**
+ * Regula falsi function to determine the next point in a bisection.
+ *
+ * @param a the value of a.
+ * @param b the value of b.
+ * @param fa the value of f(a).
+ * @param fb the value of f(b).
+ * @return the next point based on the regula falsi method.
+ */
 double rf_mid(double a, double b, double fa, double fb) {
 	return (fb*a-fa*b)/(fb-fa);
 }
@@ -198,6 +239,14 @@ void print_secant_entry(int iter, double x0, double x1, double xn) {
 					  	  << setw(15) << setprecision(8) << xn << endl;	  
 }
 
+/**
+ * Secant method of determining roots by picking two points, assuming a solution exists.
+ *
+ * @param nim numeralized identification number.
+ * @param x0 initial guess x0.
+ * @param x1 initial guess x1.
+ * @param iter_count iteration count.
+ */
 void secant(double nim, double x0, double x1, int iter_count) {
 	print_secant_header();
 
@@ -228,10 +277,23 @@ void print_newton_entry(int iter, double x0, double xn) {
 						  << setw(15) << setprecision(8) << xn << endl;
 }
 
+/**
+ * Calculate an approximate derivative of f(x).
+ *
+ * @param x the value of x.
+ * @param nim numeralized identification number.
+ */
 double dfdx(double x, double nim) {
 	return (f(x+0.00000001, nim) - f(x-0.00000001, nim))/(2*0.00000001);
 }
 
+/**
+ * Newton's method of root finding.
+ *
+ * @param iter iteration count.
+ * @param nim numeralized identification number.
+ * @param x0 initial guess.
+ */
 void newton(int iter, double nim, double x0) {
 	print_newton_header();
 	for (int i = 1; i <= iter; ++i) {
@@ -242,15 +304,3 @@ void newton(int iter, double nim, double x0) {
 		x0 = x1;
 	}
 }
-
-/*
-int main() {
-	//tabulation(-5, 5, 1, 20);
-	//bisection(-5, 5, 1, 20, midpoint);
-	//bisection(-5, 5, 1, 20, rf_mid);
-	//secant(1, -5, 3, 15);
-	//newton(10, 1, -5);
-	return 0;
-}
-*/
-
