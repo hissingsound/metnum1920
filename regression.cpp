@@ -9,6 +9,17 @@ using namespace std;
 
 typedef vector<pair<double, double>> Data;
 
+namespace regression {
+	int prompt() {
+		cout << "1) Model linear\n2) Model exponensial\n3) Model power\n4) Model saturation growth rate" << endl;
+		cout << ">";
+		int k;
+		cin >> k;
+		
+		return k;
+	}
+}
+
 double slope(int n, double x, double y, double xy, double x2) {
 	return (n*xy-(x*y))/(n*x2-x*x);
 }

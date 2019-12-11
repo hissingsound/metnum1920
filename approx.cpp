@@ -11,11 +11,18 @@ using std::setw;
 using std::setprecision;
 using std::fixed;
 using std::function;
+using std::cin;
 
-// TODO documentation
-// TODO nim as global vars
-// TODO separating f(x)
-
+namespace approx {
+	int prompt() {
+		cout << "1) Tabulasi\n2) Biseksi\n3) Regula falsi\n4) Secant\n5) Newton-Raphson" << endl;
+		cout << ">";
+		int k;
+		cin >> k;
+		
+		return k;
+	}
+}
 
 /**
  * The main function, as defined in past slides.

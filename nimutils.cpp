@@ -26,3 +26,9 @@ double numeralize(string &nim) {
 	return res_d;	
 }
 
+double prompt_nim() {
+	string _nim = ask_nim();
+	double nim = numeralize(_nim);
+	
+	return nim;
+}

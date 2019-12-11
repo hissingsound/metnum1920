@@ -9,6 +9,23 @@ using namespace std;
 
 typedef vector<vector<double>> Matrix;
 
+namespace equations {
+	int prompt() {
+		cout << "1) Gauss\n2) Gauss-Jordan\n3) Crout\n4) Doolittle" << endl;
+		cout << ">";
+		int k;
+		cin >> k;
+		
+		return k;
+	}
+}
+
+void augment_matrix(Matrix &m, vector<double> &vals) {
+	for (int i = 0; i < m.size(); ++i) {
+		m.at(i).push_back(vals.at(i));
+	}
+}
+
 ostream& operator<<(ostream& out, vector<vector<double>> &v) {
 	for (int i = 0; i < v.size(); ++i) {
 		for (int j = 0; j < v.at(0).size(); ++j) {
@@ -49,28 +66,17 @@ void gauss(vector<vector<double>> &m) {
 			m[mx_index][c_i] = temp;
 		}
 
-		cout << "after swapped: " << endl;
+		cout << "Swapping rows: " << endl;
 		cout << m << endl;
 
 		// from row=column to endrow
 		// eliminate column=column.
 		
 		double pivot_val = m[column][column];
-		cout << "pivot value is " << pivot_val << endl;
+		cout << "Pivot value is " << pivot_val << endl;
 		for (int r = column+1; r < sz; ++r) {
-			// 5 3 4 5
-			// 2 2 1 4
-			//
-			// ratio is 2/5
-			// ratio is currentcol/pivotval
-			// 5 3 4 5 is all multiplied by ratio
-			// 2 ... ... ...
-			//
-			// subtract.
-			//
-			//
 			double ratio = m[r][column]/pivot_val;
-			cout << "ratio is " << m[r][column] << "/pivot" << endl;
+			cout << "Ratio is " << m[r][column] << "/" << pivot_val << endl;
 			for (int c = column; c < m[0].size(); ++c) {
 				m[r][c] -= (ratio*m[column][c]);
 			}
@@ -84,7 +90,7 @@ vector<double> forward_sub(Matrix &m) {
 	map<int, double> ans;
 
 	//start from the highest row
-	cout << "performing forward substitution for: " << endl;
+	cout << "Performing forward substitution for: " << endl;
 
 	cout << m << endl;
 	
@@ -116,9 +122,9 @@ vector<double> backwards_sub(Matrix &m, bool jordan=false) {
 	//start from the lowest row
 	
 	if (jordan) {
-		cout << "reducing rows for: " << endl;
+		cout << "Reducing rows for: " << endl;
 	} else {
-		cout << "performing backwards subsitution for: " << endl;
+		cout << "Performing backwards subsitution for: " << endl;
 	}
 
 	cout << m << endl;
@@ -142,7 +148,7 @@ vector<double> backwards_sub(Matrix &m, bool jordan=false) {
 		}
 	}
 
-	cout << "ans: ";
+	cout << "Answer: ";
 	for (int i = 0; i < m.size(); ++i) {
 		cout << fixed << setw(7) << setprecision(3) << ans[i] << " ";
 	}
