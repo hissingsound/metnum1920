@@ -24,6 +24,10 @@ Then run the application:
 
 `app.exe`
 
+## Binaries
+
+See [Releases](https://github.com/hissingsound/metnum1920/releases)
+
 ## Usage
 
 Interface guides should suffice. But here are some sample inputs as a guide. For the sake of brevity, complete output is not shown here.
