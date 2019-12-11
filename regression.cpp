@@ -20,10 +20,28 @@ namespace regression {
 	}
 }
 
+/**
+ * Slope value of a linear regression.
+ *
+ * @param n amount of data.
+ * @param x summed values of x.
+ * @param y summed values of y.
+ * @param xy summed values of x*y.
+ * @param x2 summed values of x^2.
+ * @return the slope of the regression.
+ */
 double slope(int n, double x, double y, double xy, double x2) {
 	return (n*xy-(x*y))/(n*x2-x*x);
 }
 
+/**
+ * Intercept value of a linear regression.
+ *
+ * @param n amount of data.
+ * @param y summed values of y.
+ * @param slope the slope value.
+ * @param x summed values of x.
+ */
 double intercept(int n, double y, double slope, double x) {
 	return (y-slope*x)/n;
 }
@@ -51,7 +69,16 @@ void print_sum_entry(double x, double y, double xy, double x2) {
 		<< setw(15) << setprecision(5) << x2 << endl;
 }
 
-// returns pair of <slope, intercept>
+/**
+ * Performs a linear regression based on Data values
+ *
+ * @param D the data.
+ * @param x table lable for x.
+ * @param y table lable for y.
+ * @param xy table lable for x*y.
+ * @param x2 table lable for x^2.
+ * @return a pair of <slope, intercept> in double.
+ */
 pair<double, double> linear(Data &D, string x, string y, string xy, string x2) {
 	double sum_x = 0;
 	double sum_y = 0;
@@ -127,22 +154,3 @@ void saturation_growth_model(Data &D) {
 	cout << sol.second << "(x/(" << sol.first << "+x))" << endl;
 }
 
-/*
-int main() {
-	Data D;
-
-	int n;
-	cout << "amount: ";
-	cin >> n;
-
-	cout << "input data x y: ";
-	while (n--) {
-		double x;
-		double y;
-		cin >> x >> y;
-		D.push_back(make_pair(x, y));
-	}
-
-	return 0;
-}
-*/
