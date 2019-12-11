@@ -24,7 +24,7 @@ Then run the application:
 
 `app.exe`
 
-## Binaries
+## Precompiled binaries
 
 See [Releases](https://github.com/hissingsound/metnum1920/releases)
 
