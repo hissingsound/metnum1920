@@ -251,7 +251,6 @@ vector<Matrix> crout(Matrix &v) {
  * @param v the matrix v.
  * @return a vector of matrices, L and U.
  */
-v
 vector<Matrix> doolittle(Matrix &v) {
 	vector<Matrix> ans;
 
