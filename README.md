@@ -12,12 +12,12 @@ Caroline | D1041181030
 Muslimah | D1041181004
 Steven Hans | D1041181019
 
-## USAGE
+## Usage
 
 Interface guides should suffice. But here are some sample inputs as a guide:
 
 Input 1:
-We'll use this system of equations: [http://courses.wccnet.edu/~palay/math181/se_4x4s.htm]
+We'll use this system of equations: http://courses.wccnet.edu/~palay/math181/se_4x4s.htm
 ```
 > 2
 Input jumlah variabel: 4
