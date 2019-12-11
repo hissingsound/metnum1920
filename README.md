@@ -58,9 +58,15 @@ Memilih bagian regresi.
 4) Model saturation growth rate
 >2
 Jumlah data: 5
-Input data x y: 1 2 2 4 3 8 4 16 5 32
+Input data x y: 1 2 
+2 4 
+3 8 
+4 16 
+5 32
+```
 
 End of output 2:
+
 ```
 y = 1.00000e^(0.69315x)
 ```
